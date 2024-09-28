@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import './App.css';
 
-function Button({label, clickHandler}){
+function Button({label, clickHandler, className}){
   return(
-    <button onClick={clickHandler}>
+    <button onClick={clickHandler} className={className}>
       {label}
     </button>
     
@@ -35,25 +35,25 @@ function App() {
     e.preventDefault();
     const value  = e.target.innerHTML;
     console.log(value);
-    if(op === null){
-    if (num1 === null){
-    setnum1(value);
-    setdisp(value);}
-    else{
-      setnum1(num1+value);
-      setdisp(num1+value);
-    }
-  }else{
-    if (num2 === null){
-      setnum2(value);
-      setdisp(value);}
-      else{
-        setnum2(num2+value);
-        setdisp(num2+value);
+    if (op === null) {
+      if (num1 === null) {
+        setnum1(value);
+        setdisp(value);
+      } else {
+        const newNum1 = num1 + value;
+        setnum1(newNum1);
+        setdisp(newNum1);
       }
-  }
-    setdisp(value);
-    console.log(num1);
+    } else {
+      if (num2 === null) {
+        setnum2(value);
+        setdisp(value);
+      } else {
+        const newNum2 = num2 + value;
+        setnum2(newNum2);
+        setdisp(newNum2);
+      }
+    }
   }
 
   const opclickHandler = (e) => {
@@ -72,21 +72,37 @@ function App() {
 
     let result = null;
     if(op === '+'){
-      result = parseInt(num1) + parseInt(num2);
+      result = parseFloat(num1) + parseFloat(num2);
     }
     else if(op === '-'){
-      result = parseInt(num1) - parseInt(num2);
+      result = parseFloat(num1) - parseFloat(num2);
     }
     else if(op === '*'){
-      result = parseInt(num1) * parseInt(num2);
+      result = parseFloat(num1) * parseFloat(num2);
     }
     else if(op === '/'){
-      result = parseInt(num1) / parseInt(num2);
+      result = parseFloat(num1) / parseFloat(num2);
     }
     else{
       result ="Error";
     }
     setdisp(result);
+  }
+
+  const clearclickHandler = (e) => {
+    e.preventDefault();
+    const value  = e.target.innerHTML;
+    console.log(value);
+    setdisp(0);
+    setop(null);
+    setnum1(null);
+    setnum2(null);
+  }
+
+  const numclearclickHandler = (e) => {
+    e.preventDefault();
+    const value  = e.target.innerHTML;
+    console.log(value);
   }
 
   return (
@@ -108,10 +124,12 @@ function App() {
           <Button label={2} clickHandler={numclickHandler}/>
           <Button label={3} clickHandler={numclickHandler}/>
           <Button label={'-'} clickHandler={opclickHandler}/>
-          <Button label={'.'} clickHandler={opclickHandler}/>
+          <Button label={'.'} clickHandler={numclickHandler}/>
           <Button label={0} clickHandler={numclickHandler}/>
           <Button label={'='} clickHandler={eqclickHandler}/>
           <Button label={'+'} clickHandler={opclickHandler}/>
+          <Button className="clear-button" label={'Clear'} clickHandler={clearclickHandler}/>
+          <Button className="delete-button" label={'c'} clickHandler={numclearclickHandler}/>
         </div>
       </div>
     </div>

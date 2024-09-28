@@ -25,12 +25,29 @@
 
 .Buttons{
   background-color: aquamarine;
-  border: 2px solid black;
+  border: px solid black;
   display: grid;
-  grid-template-columns: repeat(4 ,1fr);
+  grid-gap: 2px;
+  
+  grid-template-columns: repeat(auto-fill, minmax(80px, auto));
 }
+.clear-button {
+  grid-column: span 2;
+ 
+}
+
+.clear-button:hover {
+  background-color: #ff4444; /* Darker on hover */
+}
+
+.Buttons > Button:hover {
+  background-color: #ff4444; /* Darker on hover */
+}
+
 
 .Buttons > Button{
   font-size: 2em;
   background-color: aquamarine;
 }
+
+
