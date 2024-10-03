@@ -31,8 +31,8 @@
   
   grid-template-columns: repeat(auto-fill, minmax(80px, auto));
 }
-.clear-button {
-  grid-column: span 2;
+.clear-Key {
+  grid-column: span 3;
  
 }
 
