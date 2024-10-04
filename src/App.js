@@ -1,146 +1,68 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
-function Key({label, clickHandler, className}){
-  return(
-    <button onClick={clickHandler} className={className}>
+function Key({ label, onClick }) {
+  return (
+    <button className="Button" onClick={onClick}>
       {label}
     </button>
-    
   );
 }
 
-function Display({display}){
-  return(
-    <div className="Display">
-      {display}
+function Display({ value }) {
+  return (
+    <div className="Disp">
+      {value}
     </div>
   );
 }
 
-
 function App() {
-  const[disp, setdisp] = useState(0);
-  const[num1, setnum1] = useState(null);
-  const[num2, setnum2] = useState(null);
-  const[op, setop] = useState(null);
+  const [displayValue, setDisplayValue] = useState("0");
 
-  const genenricclickHandler = (e) => {
-    e.preventDefault();
-    const value  = e.target.innerHTML;
-    console.log(value);
-  }
+  const handleClick = (label) => {
+    setDisplayValue(prev => prev === "0" ? label.toString() : prev + label);
+  };
 
-  const numclickHandler = (e) => {
-    e.preventDefault();
-    const value  = e.target.innerHTML;
-    console.log(value);
-    if (op === null) {
-      if (num1 === null) {
-        setnum1(value);
-        setdisp(value);
-      } else {
-        const newNum1 = num1 + value;
-        setnum1(newNum1);
-        setdisp(newNum1);
-      }
-    } else {
-      if (num2 === null) {
-        setnum2(value);
-        setdisp(value);
-      } else {
-        const newNum2 = num2 + value;
-        setnum2(newNum2);
-        setdisp(newNum2);
-      }
+  const showFullName = () => {
+    setDisplayValue("Santos, Sherwin Ahron N");
+  };
+
+  const calculateResult = () => {
+    try {
+      // Evaluate the expression
+      const result = eval(displayValue.replace('x', '*'));
+      setDisplayValue(result.toString());
+    } catch (error) {
+      setDisplayValue("Error");
     }
-  }
-
-  const opclickHandler = (e) => {
-    e.preventDefault();
-    const value  = e.target.innerHTML;
-    console.log(value);
-    setop(value);
-    setdisp(value);
-    console.log(op);
-  }
-
-  const eqclickHandler = (e) => {
-    e.preventDefault();
-    const value  = e.target.innerHTML;
-    console.log(num1 + '|' + op + '|' +num2);
-
-    let result = null;
-    if(op === '+'){
-      result = parseFloat(num1) + parseFloat(num2);
-    }
-    else if(op === '-'){
-      result = parseFloat(num1) - parseFloat(num2);
-    }
-    else if(op === '*'){
-      result = parseFloat(num1) * parseFloat(num2);
-    }
-    else if(op === '/'){
-      result = parseFloat(num1) / parseFloat(num2);
-    }
-    else{
-      result ="Error";
-    }
-    setdisp(result);
-  }
-
-  const clearclickHandler = (e) => {
-    e.preventDefault();
-    const value  = e.target.innerHTML;
-    console.log(value);
-    setdisp(0);
-    setop(null);
-    setnum1(null);
-    setnum2(null);
-  }
-
-  const numclearclickHandler = (e) => {
-    e.preventDefault();
-    const value  = e.target.innerHTML;
-    console.log(value);
-  }
-  const nameclickHandler = (e) => {
-    e.preventDefault();
-    const value  = e.target.innerHTML;
-    console.log(value);
-    setdisp("JOHN LEO MEDINA");
-  }
+  };
 
   return (
-    <div className="Calculator">
-      <h1>JOHN LEO MEDINA IT-3A</h1>
-      <div className="Calcontainer">
-        <div className="Displaycon">
-        <Display display ={disp}/>
+    <div className="App">
+      <h2>Calculator of SHERWIN SANTOS - IT3A</h2>
+      <div className="Calc">
+        <Display value={displayValue} />
+        <div className="ButtonsContainer">
+          <Key label={1} onClick={() => handleClick(1)} />
+          <Key label={2} onClick={() => handleClick(2)} />
+          <Key label={3} onClick={() => handleClick(3)} />
+          <Key label="+" onClick={() => handleClick('+')} />
+          <Key label={4} onClick={() => handleClick(4)} />
+          <Key label={5} onClick={() => handleClick(5)} />
+          <Key label={6} onClick={() => handleClick(6)} />
+          <Key label="-" onClick={() => handleClick('-')} />
+          <Key label={7} onClick={() => handleClick(7)} />
+          <Key label={8} onClick={() => handleClick(8)} />
+          <Key label={9} onClick={() => handleClick(9)} />
+          <Key label="x" onClick={() => handleClick('x')} />
+          <Key label={0} onClick={() => handleClick(0)} />
+          <Key label="C" onClick={() => setDisplayValue("0")} />
+          <Key label="=" onClick={calculateResult} />
+          <Key label="/" onClick={() => handleClick('/')} />
         </div>
-        <div className="Buttons">
-          <Key label={7} clickHandler={numclickHandler}/> 
-          <Key label={8} clickHandler={numclickHandler}/>
-          <Key label={9} clickHandler={numclickHandler}/>
-          <Key label={'/'} clickHandler={opclickHandler}/>
-          <Key label={4} clickHandler={numclickHandler}/>
-          <Key label={5} clickHandler={numclickHandler}/>
-          <Key label={6} clickHandler={numclickHandler}/>
-          <Key label={'*'} clickHandler={opclickHandler}/>
-          <Key label={1} clickHandler={numclickHandler}/>
-          <Key label={2} clickHandler={numclickHandler}/>
-          <Key label={3} clickHandler={numclickHandler}/>
-          <Key label={'-'} clickHandler={opclickHandler}/>
-          <Key label={'.'} clickHandler={numclickHandler}/>
-          <Key label={0} clickHandler={numclickHandler}/>
-          <Key label={'='} clickHandler={eqclickHandler}/>
-          <Key label={'+'} clickHandler={opclickHandler}/>
-          <Key className="clear-Key" label={'Clear'} clickHandler={clearclickHandler}/>
-          <Key className="delete-Key" label={'c'} clickHandler={numclearclickHandler}/>
-          
-        </div>
+        <Key label="SANTOS" onClick={showFullName} />
       </div>
-      <Key label ={'MEDINA'} clickHandler={nameclickHandler}/>
     </div>
   );
 }
