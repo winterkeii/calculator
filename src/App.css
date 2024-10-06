@@ -5,7 +5,7 @@
 }
 
 .Calcontainer{
-  background-color: rgb(148, 196, 204);
+  background-color: #61614d;
   width: 350px;
   border: 1px solid black;
   border-radius: 5px;
@@ -17,6 +17,11 @@
   height: 60px;
   background-color: aliceblue;
   border: 1px solid black;
+ 
+}
+.Display{
+  padding-right: 3px;
+  
 }
 .Displaycon{
   font-size: 2rem;
@@ -41,7 +46,7 @@
 }
 
 .clear-Key {
-  grid-column: span 4;
+  grid-column: span 1;
 
 }
 
@@ -50,7 +55,7 @@
 }
 
 .Buttons > Button:hover {
-  background-color: #44caff; /* Darker on hover */
+  background-color: #5b5b5c; /* Darker on hover */
 }
 
 
@@ -65,7 +70,7 @@
 }
 
 .MEDINA{
-   margin-top: 18px;
+   margin-top: 1px;
    font-size: 2em;
-   width: 380px;
+   grid-column: span 4;
 }

@@ -131,14 +131,14 @@ function App() {
           <Key label={2} clickHandler={numclickHandler}/>
           <Key label={3} clickHandler={numclickHandler}/>
           <Key label={'-'} clickHandler={opclickHandler}/>
-          <Key label={'.'} clickHandler={numclickHandler}/>
+          <Key className="clear-Key" label={'C'} clickHandler={clearclickHandler}/>
           <Key label={0} clickHandler={numclickHandler}/>
           <Key label={'='} clickHandler={eqclickHandler}/>
           <Key label={'+'} clickHandler={opclickHandler}/>
-          <Key className="clear-Key" label={'Clear'} clickHandler={clearclickHandler}/>
+          <Key className="MEDINA" label ={'MEDINA'} clickHandler={nameclickHandler}/>
         </div>
       </div>
-      <Key className="MEDINA" label ={'MEDINA'} clickHandler={nameclickHandler}/>
+      
     </div>
   );
 }
