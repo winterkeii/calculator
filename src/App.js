@@ -98,7 +98,6 @@ function App() {
     setnum1(null);
     setnum2(null);
   }
-
   const numclearclickHandler = (e) => {
     e.preventDefault();
     const value  = e.target.innerHTML;
@@ -113,7 +112,7 @@ function App() {
 
   return (
     <div className="Calculator">
-      <h1>JOHN LEO MEDINA IT-3A</h1>
+      <h1>CALCULATOR OF JOHN LEO MEDINA IT-3A</h1>
       <div className="Calcontainer">
         <div className="Displaycon">
         <Display display ={disp}/>
